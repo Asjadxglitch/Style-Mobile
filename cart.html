@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Style Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-section img {
+            height: 2.5rem;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #E0E0E0;
+            background-color: white;
+            color: #1A1A1A;
+        }
+
+        .btn:hover {
+            background-color: #F8F9FA;
+        }
+
+        .btn-primary {
+            background-color: #FF6B35;
+            color: white;
+            border-color: #FF6B35;
+        }
+
+        .btn-primary:hover {
+            background-color: #E55A2B;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 3rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Cart Layout */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        @media (min-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Cart Items */
+        .cart-items {
+            background-color: #F8F9FA;
+            border-radius: 0.5rem;
+            border: 1px solid #E0E0E0;
+            overflow: hidden;
+        }
+
+        .cart-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .cart-item:hover {
+            background-color: rgba(248, 249, 250, 0.5);
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .item-icon {
+            font-size: 2rem;
+        }
+
+        .item-info h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-info p {
+            font-size: 0.875rem;
+            color: #666666;
+        }
+
+        .item-price {
+            text-align: right;
+        }
+
+        .item-price p {
+            font-weight: 700;
+            color: #FF6B35;
+            margin-bottom: 0.5rem;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #E74C3C;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .remove-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background-color: #F8F9FA;
+            border-radius: 0.5rem;
+            border: 1px solid #E0E0E0;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 5rem;
+        }
+
+        .order-summary h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #666666;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .total-amount {
+            color: #FF6B35;
+            font-size: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            max-width: 40rem;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            background-color: white;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666666;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #E0E0E0;
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF6B35;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .payment-methods {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .payment-option {
+            padding: 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .payment-option:hover {
+            border-color: #FF6B35;
+        }
+
+        .payment-option.selected {
+            border-color: #FF6B35;
+            background-color: rgba(255, 107, 53, 0.05);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-option h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .payment-option p {
+            font-size: 0.75rem;
+            color: #666666;
+        }
+
+        .payment-details {
+            background-color: #F8F9FA;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-details p {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 0.75rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1A1A1A;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .empty-cart p {
+            color: #666666;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section" onclick="window.location.href='index.html'">
+                    <img src="style-mobile-logo.png" alt="Style Mobile">
+                    <span class="logo-text">Style Mobile</span>
+                </div>
+                <button class="btn" onclick="window.location.href='shop.html'">← Continue Shopping</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Shopping Cart</h1>
+        </div>
+
+        <!-- Cart Layout -->
+        <div class="cart-layout" id="cartLayout">
+
+            <!-- Cart Items — rendered by JavaScript, NOT hardcoded -->
+            <div class="cart-items" id="cartItems"></div>
+
+            <!-- Order Summary -->
+            <div class="order-summary" id="orderSummary">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">LKR 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shipping">LKR 200</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (5%)</span>
+                    <span id="tax">LKR 0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="total-amount" id="total">LKR 0</span>
+                </div>
+                <button class="btn btn-primary checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="close-btn" onclick="closeCheckout()">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Shipping Information -->
+                <div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">Shipping Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group form-grid full">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email">
+                    </div>
+                    <div class="form-group form-grid full">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group form-grid full">
+                        <label>Address</label>
+                        <input type="text" placeholder="Address">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" placeholder="Postal Code">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div style="margin-top: 2rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 1rem;">Select Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-option selected" onclick="selectPayment(this, 'koko')">
+                            <div class="payment-icon">📱</div>
+                            <h4>Koko Payment</h4>
+                            <p>Fast and secure</p>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'bank')">
+                            <div class="payment-icon">🏦</div>
+                            <h4>Bank Transfer</h4>
+                            <p>Direct transfer</p>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'card')">
+                            <div class="payment-icon">💳</div>
+                            <h4>Card Payment</h4>
+                            <p>Visa/Mastercard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Details -->
+                <div id="paymentDetails"></div>
+
+                <!-- Order Summary in Modal -->
+                <div style="background-color: #F8F9FA; border-radius: 0.5rem; border: 1px solid #E0E0E0; padding: 1rem;">
+                    <h4 style="font-weight: 600; margin-bottom: 0.75rem;">Order Summary</h4>
+                    <div class="summary-row" style="margin-bottom: 0.5rem;">
+                        <span>Subtotal</span>
+                        <span id="modalSubtotal">LKR 0</span>
+                    </div>
+                    <div class="summary-row" style="margin-bottom: 0.5rem;">
+                        <span>Shipping</span>
+                        <span>LKR 200</span>
+                    </div>
+                    <div class="summary-row" style="margin-bottom: 0.5rem;">
+                        <span>Tax (5%)</span>
+                        <span id="modalTax">LKR 0</span>
+                    </div>
+                    <div class="summary-row total" style="border-top: 1px solid #E0E0E0; padding-top: 0.75rem; margin-top: 0.75rem;">
+                        <span>Total</span>
+                        <span class="total-amount" id="modalTotal">LKR 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn" onclick="closeCheckout()">Cancel</button>
+                <button class="btn btn-primary" onclick="completeOrder()">Complete Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Style Mobile. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const SHIPPING = 200;
+        const TAX_RATE = 0.05;
+        let selectedPaymentMethod = 'koko';
+
+        // ── Read / Write cart from localStorage ──
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart') || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            localStorage.setItem('cartCount', total);
+        }
+
+        // ── Render cart items from localStorage ──
+        function renderCart() {
+            const cart = getCart();
+            const cartItemsEl  = document.getElementById('cartItems');
+            const orderSummary = document.getElementById('orderSummary');
+            const cartLayout   = document.getElementById('cartLayout');
+
+            if (cart.length === 0) {
+                // Hide order summary, stretch cart area full width
+                orderSummary.style.display = 'none';
+                cartLayout.style.gridTemplateColumns = '1fr';
+                cartItemsEl.innerHTML = `
+                    <div class="empty-cart">
+                        <p>Your cart is empty</p>
+                        <button class="btn btn-primary" onclick="window.location.href='shop.html'">Start Shopping</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Restore layout when cart has items
+            orderSummary.style.display = '';
+            cartLayout.style.gridTemplateColumns = '';
+
+            cartItemsEl.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div class="item-details">
+                        <div class="item-icon">${item.icon}</div>
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                            <p>Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <div class="item-price">
+                        <p>LKR ${(item.price * item.quantity).toLocaleString()}</p>
+                        <button class="remove-btn" onclick="removeItem(${index})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+
+            updateSummary(cart);
+        }
+
+        // ── Recalculate and update totals ──
+        function updateSummary(cart) {
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const tax      = Math.round(subtotal * TAX_RATE);
+            const total    = subtotal + SHIPPING + tax;
+
+            document.getElementById('subtotal').textContent    = `LKR ${subtotal.toLocaleString()}`;
+            document.getElementById('tax').textContent         = `LKR ${tax.toLocaleString()}`;
+            document.getElementById('total').textContent       = `LKR ${total.toLocaleString()}`;
+            document.getElementById('modalSubtotal').textContent = `LKR ${subtotal.toLocaleString()}`;
+            document.getElementById('modalTax').textContent    = `LKR ${tax.toLocaleString()}`;
+            document.getElementById('modalTotal').textContent  = `LKR ${total.toLocaleString()}`;
+        }
+
+        // ── Remove item by index, save, re-render ──
+        function removeItem(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+        }
+
+        // ── Checkout modal ──
+        function openCheckout() {
+            // Refresh payment details with current total
+            selectPayment(document.querySelector('.payment-option.selected'), selectedPaymentMethod);
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            if (element) element.classList.add('selected');
+            selectedPaymentMethod = method;
+
+            const cart     = getCart();
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const tax      = Math.round(subtotal * TAX_RATE);
+            const total    = subtotal + SHIPPING + tax;
+            const details  = document.getElementById('paymentDetails');
+
+            if (method === 'koko') {
+                details.innerHTML = `
+                    <div class="payment-details">
+                        <p><strong>Koko Payment Gateway</strong></p>
+                        <p>You will be redirected to Koko to complete your transaction securely.</p>
+                        <div style="margin-top:1rem;padding:0.75rem;background:white;border-radius:0.5rem;border:1px solid #E0E0E0;">
+                            <p style="font-size:0.875rem;font-weight:600;">Amount: LKR ${total.toLocaleString()}</p>
+                        </div>
+                    </div>`;
+            } else if (method === 'bank') {
+                details.innerHTML = `
+                    <div class="payment-details">
+                        <p><strong>Bank Transfer Details</strong></p>
+                        <p><strong>Bank:</strong> Commercial Bank of Ceylon</p>
+                        <p><strong>Account Name:</strong> Style Mobile</p>
+                        <p><strong>Account Number:</strong> XXXX XXXX XXXX 1234</p>
+                        <p><strong>Amount:</strong> LKR ${total.toLocaleString()}</p>
+                        <p style="margin-top:1rem;font-size:0.75rem;">Please contact us on WhatsApp after transfer for confirmation</p>
+                    </div>`;
+            } else if (method === 'card') {
+                details.innerHTML = `
+                    <div class="form-group" style="margin-top:1rem;">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="Card Number">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>MM/YY</label><input type="text" placeholder="MM/YY"></div>
+                        <div class="form-group"><label>CVV</label><input type="text" placeholder="CVV"></div>
+                    </div>`;
+            }
+        }
+
+        function completeOrder() {
+            alert('Order placed successfully! Thank you for shopping with Style Mobile.');
+            saveCart([]);   // Clear cart from localStorage
+            closeCheckout();
+            renderCart();   // Re-render to show empty state
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('checkoutModal').addEventListener('click', function (e) {
+            if (e.target === this) closeCheckout();
+        });
+
+        // ── Run on page load ──
+        renderCart();
+        // Set default payment details
+        selectPayment(document.querySelector('.payment-option.selected'), 'koko');
+    </script>
+</body>
+</html>

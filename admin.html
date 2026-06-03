@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Style Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; color: #1A1A1A; }
+
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        @media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+        header {
+            position: sticky; top: 0; z-index: 50;
+            background-color: white; border-bottom: 1px solid #E0E0E0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .header-content { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
+        .header-left { display: flex; align-items: center; gap: 1rem; }
+
+        .btn {
+            padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s; border: 2px solid #E0E0E0;
+            background-color: white; color: #1A1A1A; font-size: 0.875rem;
+        }
+        .btn:hover { background-color: #F8F9FA; }
+        .btn-primary { background-color: #FF6B35; color: white; border-color: #FF6B35; }
+        .btn-primary:hover { background-color: #E55A2B; }
+        .btn-danger { background-color: #DC3545; color: white; border-color: #DC3545; }
+        .btn-danger:hover { background-color: #C82333; }
+        .btn-small { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+
+        .nav-tabs {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem;
+            overflow-x: auto; padding-bottom: 0.5rem; padding-top: 1.5rem;
+        }
+        .nav-tab {
+            padding: 0.65rem 1.25rem; border-radius: 0.5rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s; border: 1px solid #E0E0E0;
+            background-color: white; color: #1A1A1A; white-space: nowrap; font-size: 0.875rem;
+        }
+        .nav-tab.active { background-color: #FF6B35; color: white; border-color: #FF6B35; }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem;
+        }
+        @media (min-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .stat-card {
+            background-color: white; border-radius: 0.5rem; padding: 1.5rem;
+            border: 1px solid #E0E0E0; transition: box-shadow 0.3s;
+        }
+        .stat-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .stat-label { color: #666; font-size: 0.875rem; margin-bottom: 0.25rem; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: #FF6B35; }
+
+        /* Table */
+        .table-container {
+            background-color: white; border-radius: 0.5rem;
+            border: 1px solid #E0E0E0; overflow: hidden;
+        }
+        .table-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #E0E0E0; display: flex; align-items: center; justify-content: space-between; }
+        .table-header h3 { font-size: 1.1rem; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background-color: #F8F9FA; border-bottom: 1px solid #E0E0E0; }
+        th { padding: 0.875rem 1rem; text-align: left; font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.03em; }
+        td { padding: 0.875rem 1rem; border-bottom: 1px solid #F0F0F0; font-size: 0.875rem; vertical-align: middle; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background-color: #FAFAFA; }
+
+        .empty-row td { text-align: center; color: #999; padding: 3rem; font-size: 0.9rem; }
+
+        .status-badge {
+            display: inline-block; padding: 0.25rem 0.7rem;
+            border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+        }
+        .status-completed { background-color: #D4EDDA; color: #155724; }
+        .status-shipped   { background-color: #D1ECF1; color: #0C5460; }
+        .status-pending   { background-color: #FFF3CD; color: #856404; }
+        .status-active    { background-color: #D4EDDA; color: #155724; }
+        .status-inactive  { background-color: #F8D7DA; color: #721C24; }
+        .status-low       { background-color: #FFF3CD; color: #856404; }
+
+        /* Form */
+        .form-section {
+            background-color: white; border-radius: 0.5rem;
+            padding: 2rem; border: 1px solid #E0E0E0; margin-bottom: 2rem;
+        }
+        .form-section h3 { font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media (min-width: 768px) { .form-grid { grid-template-columns: repeat(2, 1fr); } }
+        .form-grid.full { grid-template-columns: 1fr !important; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.85rem; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.6rem 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif; font-size: 0.875rem; background: white;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none; border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+        }
+        .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+        /* Image upload */
+        .image-upload-area {
+            border: 2px dashed #E0E0E0; border-radius: 0.5rem; padding: 1.5rem;
+            text-align: center; cursor: pointer; transition: all 0.3s; position: relative;
+        }
+        .image-upload-area:hover { border-color: #FF6B35; background-color: #FFF5F1; }
+        .image-upload-area input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+        }
+        .image-upload-area p { color: #999; font-size: 0.875rem; margin-top: 0.5rem; }
+        .image-upload-area .upload-icon { font-size: 2rem; }
+        .image-preview {
+            width: 100%; max-height: 160px; object-fit: contain;
+            border-radius: 0.5rem; display: none; margin-top: 0.75rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; inset: 0;
+            background-color: rgba(0,0,0,0.5); z-index: 200;
+            align-items: center; justify-content: center; padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background-color: white; border-radius: 0.75rem;
+            max-width: 42rem; width: 100%; max-height: 92vh; overflow-y: auto;
+        }
+        .modal-content.wide { max-width: 56rem; }
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.25rem 1.5rem; border-bottom: 1px solid #E0E0E0;
+            position: sticky; top: 0; background-color: white; z-index: 1;
+        }
+        .modal-header h2 { font-size: 1.25rem; }
+        .close-btn { background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #666; padding: 0.25rem; }
+        .close-btn:hover { color: #1A1A1A; }
+        .modal-body { padding: 1.5rem; }
+
+        .action-buttons { display: flex; gap: 0.4rem; align-items: center; }
+        .action-btn {
+            background: none; border: 1px solid #E0E0E0; cursor: pointer;
+            font-size: 0.9rem; padding: 0.3rem 0.5rem; border-radius: 0.35rem;
+            transition: all 0.2s; color: #555;
+        }
+        .action-btn:hover { background-color: #F8F9FA; border-color: #CCC; }
+
+        .page-title { font-size: 1.75rem; margin-bottom: 1.5rem; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+        .section-header h2 { font-size: 1.5rem; }
+
+        /* Inventory specific */
+        .stock-input {
+            width: 80px; padding: 0.3rem 0.5rem; border: 1px solid #E0E0E0;
+            border-radius: 0.35rem; font-size: 0.875rem; text-align: center;
+        }
+        .stock-input:focus { outline: none; border-color: #FF6B35; }
+
+        .low-stock-alert {
+            background-color: #FFF3CD; border: 1px solid #FFEAA7;
+            border-radius: 0.5rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+            display: none; align-items: center; gap: 0.75rem;
+        }
+        .low-stock-alert.visible { display: flex; }
+        .low-stock-alert p { font-size: 0.875rem; color: #856404; }
+
+        /* Order detail */
+        .order-detail-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #F0F0F0; font-size: 0.9rem; }
+        .order-detail-row:last-child { border-bottom: none; }
+        .order-detail-row strong { color: #1A1A1A; }
+
+        .product-thumb {
+            width: 2.5rem; height: 2.5rem; border-radius: 0.35rem;
+            object-fit: cover; border: 1px solid #E0E0E0;
+        }
+        .product-thumb-placeholder {
+            width: 2.5rem; height: 2.5rem; border-radius: 0.35rem;
+            background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(0,153,255,0.15));
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; border: 1px solid #E0E0E0; flex-shrink: 0;
+        }
+        .product-cell { display: flex; align-items: center; gap: 0.75rem; }
+
+        select.status-select {
+            padding: 0.3rem 0.5rem; border: 1px solid #E0E0E0;
+            border-radius: 0.35rem; font-size: 0.8rem; cursor: pointer;
+        }
+        select.status-select:focus { outline: none; border-color: #FF6B35; }
+
+        .tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 500; background: #F0F0F0; color: #555; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="btn" onclick="window.location.href='index.html'">← Back to Store</button>
+                <h1 style="font-size: 1.4rem;">Admin Panel</h1>
+            </div>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+        <button class="nav-tab" onclick="switchTab('products', this)">📦 Products</button>
+        <button class="nav-tab" onclick="switchTab('orders', this)">🛒 Orders</button>
+        <button class="nav-tab" onclick="switchTab('inventory', this)">🗃️ Inventory</button>
+        <button class="nav-tab" onclick="switchTab('settings', this)">⚙️ Settings</button>
+    </div>
+
+    <!-- ── Dashboard ── -->
+    <div id="dashboard" class="content-section active">
+        <h2 class="page-title">Dashboard</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🛒</div>
+                <div class="stat-label">Total Orders</div>
+                <div class="stat-value" id="statOrders">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value" id="statRevenue">LKR 0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-label">Products</div>
+                <div class="stat-value" id="statProducts">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-label">Low Stock Items</div>
+                <div class="stat-value" id="statLowStock">0</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header"><h3>Recent Orders</h3></div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboardOrdersBody">
+                        <tr class="empty-row"><td colspan="5">No orders yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Products ── -->
+    <div id="products" class="content-section">
+        <div class="section-header">
+            <h2>Products</h2>
+            <button class="btn btn-primary" onclick="openProductForm()">+ Add Product</button>
+        </div>
+        <div class="table-container">
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <tr class="empty-row"><td colspan="6">No products yet. Click "+ Add Product" to get started.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Orders ── -->
+    <div id="orders" class="content-section">
+        <h2 class="page-title">Orders</h2>
+        <div class="table-container">
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th><th>Customer</th><th>Amount</th><th>Payment</th><th>Status</th><th>Date</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <tr class="empty-row"><td colspan="7">No orders yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Inventory ── -->
+    <div id="inventory" class="content-section">
+        <div class="section-header">
+            <h2>Inventory Management</h2>
+            <button class="btn btn-primary" onclick="saveAllStock()">💾 Save Stock Changes</button>
+        </div>
+
+        <div class="low-stock-alert" id="lowStockAlert">
+            <span style="font-size:1.2rem;">⚠️</span>
+            <p id="lowStockMsg">Some products are running low on stock (below 10 units).</p>
+        </div>
+
+        <div class="table-container">
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th><th>Category</th><th>Current Stock</th><th>Update Stock</th><th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <tr class="empty-row"><td colspan="5">No products to manage. Add products first.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Settings ── -->
+    <div id="settings" class="content-section">
+        <h2 class="page-title">Settings</h2>
+        <div style="display: grid; gap: 2rem;">
+            <div class="form-section">
+                <h3>Store Settings</h3>
+                <div class="form-grid full">
+                    <div class="form-group"><label>Store Name</label><input type="text" id="storeName" value="Style Mobile"></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="storePhone" value="077 550 6050"></div>
+                    <div class="form-group"><label>Address</label><input type="text" id="storeAddress" value="8 Piliyandala - Maharagama Rd, Maharagama 10280"></div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="saveStoreSettings()">Save Changes</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Payment Settings</h3>
+                <div class="form-grid full">
+                    <div class="form-group"><label>Koko API Key</label><input type="password" id="kokoKey" placeholder="Enter Koko API Key"></div>
+                    <div class="form-group"><label>Bank Account Details</label><textarea id="bankDetails" rows="3" placeholder="Enter bank account details"></textarea></div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="savePaymentSettings()">Update Payment Settings</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 style="color:#DC3545;">Danger Zone</h3>
+                <p style="font-size:0.875rem;color:#666;margin-bottom:1rem;">These actions are permanent and cannot be undone.</p>
+                <div class="form-actions">
+                    <button class="btn btn-danger btn-small" onclick="clearAllData()">🗑️ Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Product Form Modal ── -->
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="productModalTitle">Add New Product</h2>
+            <button class="close-btn" onclick="closeProductForm()">✕</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="editProductId">
+
+            <div class="form-group" style="margin-bottom:1rem;">
+                <label>Product Image</label>
+                <div class="image-upload-area" id="imageUploadArea">
+                    <input type="file" id="productImageInput" accept="image/*" onchange="handleImageUpload(event)">
+                    <div id="uploadPlaceholder">
+                        <div class="upload-icon">📷</div>
+                        <p>Click to upload image<br><small>JPG, PNG, WEBP accepted</small></p>
+                    </div>
+                    <img class="image-preview" id="imagePreview" src="" alt="Preview">
+                    <div id="removeImageBtn" style="display:none; margin-top:0.5rem;">
+                        <button type="button" class="btn btn-small" onclick="removeImage(event)" style="font-size:0.75rem;">✕ Remove Image</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:1rem;">
+                <label>Product Name *</label>
+                <input type="text" id="productName" placeholder="e.g. Premium Phone Case">
+            </div>
+
+            <div class="form-grid" style="margin-bottom:1rem;">
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="productCategory">
+                        <option value="cases">Cases</option>
+                        <option value="screen-protectors">Screen Protectors</option>
+                        <option value="chargers">Chargers</option>
+                        <option value="cables">Cables</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="earphones">Earphones</option>
+                        <option value="power-banks">Power Banks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price (LKR) *</label>
+                    <input type="number" id="productPrice" placeholder="0" min="0">
+                </div>
+            </div>
+
+            <div class="form-grid" style="margin-bottom:1rem;">
+                <div class="form-group">
+                    <label>Stock Quantity *</label>
+                    <input type="number" id="productStock" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="productStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:1rem;">
+                <label>Description</label>
+                <textarea id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" onclick="closeProductForm()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── View Product Modal ── -->
+<div class="modal" id="viewProductModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Product Details</h2>
+            <button class="close-btn" onclick="closeModal('viewProductModal')">✕</button>
+        </div>
+        <div class="modal-body" id="viewProductBody"></div>
+    </div>
+</div>
+
+<!-- ── View Order Modal ── -->
+<div class="modal" id="viewOrderModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="viewOrderTitle">Order Details</h2>
+            <button class="close-btn" onclick="closeModal('viewOrderModal')">✕</button>
+        </div>
+        <div class="modal-body" id="viewOrderBody"></div>
+    </div>
+</div>
+
+<script>
+// ─── Data Store ───────────────────────────────────────────────
+function getData(key, def) {
+    try { return JSON.parse(localStorage.getItem(key)) || def; }
+    catch { return def; }
+}
+function setData(key, val) {
+    localStorage.setItem(key, JSON.stringify(val));
+}
+
+let products = getData('sm_products', []);
+let orders   = getData('sm_orders', []);
+let settings = getData('sm_settings', { name: 'Style Mobile', phone: '077 550 6050', address: '8 Piliyandala - Maharagama Rd, Maharagama 10280' });
+
+// ─── Tab Switching ─────────────────────────────────────────────
+function switchTab(tabName, el) {
+    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    el.classList.add('active');
+    if (tabName === 'dashboard')  renderDashboard();
+    if (tabName === 'products')   renderProducts();
+    if (tabName === 'orders')     renderOrders();
+    if (tabName === 'inventory')  renderInventory();
+}
+
+// ─── Dashboard ────────────────────────────────────────────────
+function renderDashboard() {
+    const totalRevenue = orders.reduce((s, o) => s + (o.total || 0), 0);
+    const lowStock = products.filter(p => p.stock < 10).length;
+
+    document.getElementById('statOrders').textContent   = orders.length;
+    document.getElementById('statRevenue').textContent  = 'LKR ' + totalRevenue.toLocaleString();
+    document.getElementById('statProducts').textContent = products.length;
+    document.getElementById('statLowStock').textContent = lowStock;
+
+    const recent = [...orders].reverse().slice(0, 5);
+    const tbody = document.getElementById('dashboardOrdersBody');
+    if (recent.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No orders yet</td></tr>';
+        return;
+    }
+    tbody.innerHTML = recent.map(o => `
+        <tr>
+            <td><strong>${o.id}</strong></td>
+            <td>${o.customer}</td>
+            <td><strong style="color:#FF6B35;">LKR ${o.total.toLocaleString()}</strong></td>
+            <td><span class="status-badge status-${o.status}">${o.status}</span></td>
+            <td>${o.date}</td>
+        </tr>`).join('');
+}
+
+// ─── Products ─────────────────────────────────────────────────
+function renderProducts() {
+    const tbody = document.getElementById('productsTableBody');
+    if (products.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No products yet. Click "+ Add Product" to get started.</td></tr>';
+        return;
+    }
+    tbody.innerHTML = products.map(p => `
+        <tr>
+            <td>
+                <div class="product-cell">
+                    ${p.image
+                        ? `<img src="${p.image}" class="product-thumb" alt="${p.name}">`
+                        : `<div class="product-thumb-placeholder">📱</div>`}
+                    <strong>${p.name}</strong>
+                </div>
+            </td>
+            <td><span class="tag">${p.category}</span></td>
+            <td><strong style="color:#FF6B35;">LKR ${Number(p.price).toLocaleString()}</strong></td>
+            <td>${p.stock}</td>
+            <td><span class="status-badge status-${p.status}">${p.status}</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn" title="View" onclick="viewProduct('${p.id}')">👁️</button>
+                    <button class="action-btn" title="Edit" onclick="openEditProduct('${p.id}')">✏️</button>
+                    <button class="action-btn" title="Delete" onclick="deleteProduct('${p.id}')" style="color:#DC3545;">🗑️</button>
+                </div>
+            </td>
+        </tr>`).join('');
+}
+
+function openProductForm() {
+    document.getElementById('editProductId').value = '';
+    document.getElementById('productName').value = '';
+    document.getElementById('productCategory').value = 'cases';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productStock').value = '';
+    document.getElementById('productStatus').value = 'active';
+    document.getElementById('productDescription').value = '';
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('uploadPlaceholder').style.display = 'block';
+    document.getElementById('removeImageBtn').style.display = 'none';
+    document.getElementById('productImageInput').value = '';
+    document.getElementById('productModalTitle').textContent = 'Add New Product';
+    document.getElementById('productModal').classList.add('active');
+}
+
+function openEditProduct(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('editProductId').value = p.id;
+    document.getElementById('productName').value = p.name;
+    document.getElementById('productCategory').value = p.category;
+    document.getElementById('productPrice').value = p.price;
+    document.getElementById('productStock').value = p.stock;
+    document.getElementById('productStatus').value = p.status;
+    document.getElementById('productDescription').value = p.description || '';
+    document.getElementById('productModalTitle').textContent = 'Edit Product';
+
+    const preview = document.getElementById('imagePreview');
+    const placeholder = document.getElementById('uploadPlaceholder');
+    const removeBtn = document.getElementById('removeImageBtn');
+    if (p.image) {
+        preview.src = p.image;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        removeBtn.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+        preview.src = '';
+        placeholder.style.display = 'block';
+        removeBtn.style.display = 'none';
+    }
+    document.getElementById('productModal').classList.add('active');
+}
+
+function saveProduct() {
+    const name     = document.getElementById('productName').value.trim();
+    const price    = document.getElementById('productPrice').value;
+    const stock    = document.getElementById('productStock').value;
+    const category = document.getElementById('productCategory').value;
+    const status   = document.getElementById('productStatus').value;
+    const desc     = document.getElementById('productDescription').value.trim();
+    const image    = document.getElementById('imagePreview').src || '';
+    const editId   = document.getElementById('editProductId').value;
+
+    if (!name)  { alert('Please enter a product name.'); return; }
+    if (!price) { alert('Please enter a price.'); return; }
+    if (!stock && stock !== '0') { alert('Please enter stock quantity.'); return; }
+
+    if (editId) {
+        const idx = products.findIndex(p => p.id === editId);
+        if (idx > -1) {
+            products[idx] = { ...products[idx], name, price: Number(price), stock: Number(stock), category, status, description: desc, image: image.startsWith('data:') ? image : products[idx].image };
+        }
+    } else {
+        const newProduct = {
+            id: 'PRD' + Date.now(),
+            name, price: Number(price), stock: Number(stock),
+            category, status, description: desc,
+            image: image.startsWith('data:') ? image : '',
+            createdAt: new Date().toISOString()
+        };
+        products.push(newProduct);
+    }
+
+    setData('sm_products', products);
+    closeProductForm();
+    renderProducts();
+    renderDashboard();
+    alert(editId ? 'Product updated!' : 'Product added!');
+}
+
+function viewProduct(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('viewProductBody').innerHTML = `
+        <div style="text-align:center;margin-bottom:1.5rem;">
+            ${p.image ? `<img src="${p.image}" style="max-height:200px;max-width:100%;border-radius:0.5rem;object-fit:contain;border:1px solid #E0E0E0;">` : `<div style="height:140px;background:linear-gradient(135deg,rgba(255,107,53,0.1),rgba(0,153,255,0.1));border-radius:0.5rem;display:flex;align-items:center;justify-content:center;font-size:3rem;">📱</div>`}
+        </div>
+        <div class="order-detail-row"><span>Name</span><strong>${p.name}</strong></div>
+        <div class="order-detail-row"><span>Category</span><span class="tag">${p.category}</span></div>
+        <div class="order-detail-row"><span>Price</span><strong style="color:#FF6B35;">LKR ${Number(p.price).toLocaleString()}</strong></div>
+        <div class="order-detail-row"><span>Stock</span><strong>${p.stock} units</strong></div>
+        <div class="order-detail-row"><span>Status</span><span class="status-badge status-${p.status}">${p.status}</span></div>
+        ${p.description ? `<div class="order-detail-row" style="flex-direction:column;gap:0.4rem;"><span>Description</span><p style="color:#555;font-size:0.875rem;">${p.description}</p></div>` : ''}
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;">
+            <button class="btn btn-primary" style="flex:1;" onclick="closeModal('viewProductModal');openEditProduct('${p.id}')">✏️ Edit</button>
+            <button class="btn btn-danger" style="flex:1;" onclick="closeModal('viewProductModal');deleteProduct('${p.id}')">🗑️ Delete</button>
+        </div>`;
+    document.getElementById('viewProductModal').classList.add('active');
+}
+
+function deleteProduct(id) {
+    if (!confirm('Delete this product? This cannot be undone.')) return;
+    products = products.filter(p => p.id !== id);
+    setData('sm_products', products);
+    renderProducts();
+    renderInventory();
+    renderDashboard();
+    alert('Product deleted.');
+}
+
+function closeProductForm() {
+    document.getElementById('productModal').classList.remove('active');
+}
+
+// ─── Image Upload ──────────────────────────────────────────────
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const preview = document.getElementById('imagePreview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        document.getElementById('uploadPlaceholder').style.display = 'none';
+        document.getElementById('removeImageBtn').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeImage(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('uploadPlaceholder').style.display = 'block';
+    document.getElementById('removeImageBtn').style.display = 'none';
+    document.getElementById('productImageInput').value = '';
+}
+
+// ─── Orders ───────────────────────────────────────────────────
+function renderOrders() {
+    const tbody = document.getElementById('ordersTableBody');
+    if (orders.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No orders yet</td></tr>';
+        return;
+    }
+    tbody.innerHTML = [...orders].reverse().map(o => `
+        <tr>
+            <td><strong>${o.id}</strong></td>
+            <td>${o.customer}</td>
+            <td><strong style="color:#FF6B35;">LKR ${o.total.toLocaleString()}</strong></td>
+            <td>${o.payment}</td>
+            <td>
+                <select class="status-select" onchange="updateOrderStatus('${o.id}', this.value)">
+                    <option value="pending"   ${o.status==='pending'?'selected':''}>Pending</option>
+                    <option value="shipped"   ${o.status==='shipped'?'selected':''}>Shipped</option>
+                    <option value="completed" ${o.status==='completed'?'selected':''}>Completed</option>
+                </select>
+            </td>
+            <td>${o.date}</td>
+            <td><button class="btn btn-small" onclick="viewOrder('${o.id}')">View</button></td>
+        </tr>`).join('');
+}
+
+function updateOrderStatus(id, status) {
+    const idx = orders.findIndex(o => o.id === id);
+    if (idx > -1) { orders[idx].status = status; setData('sm_orders', orders); renderDashboard(); }
+}
+
+function viewOrder(id) {
+    const o = orders.find(x => x.id === id);
+    if (!o) return;
+    document.getElementById('viewOrderTitle').textContent = 'Order ' + o.id;
+    document.getElementById('viewOrderBody').innerHTML = `
+        <div class="order-detail-row"><span>Order ID</span><strong>${o.id}</strong></div>
+        <div class="order-detail-row"><span>Customer</span><strong>${o.customer}</strong></div>
+        <div class="order-detail-row"><span>Phone</span><span>${o.phone || '—'}</span></div>
+        <div class="order-detail-row"><span>Address</span><span>${o.address || '—'}</span></div>
+        <div class="order-detail-row"><span>Payment</span><span>${o.payment}</span></div>
+        <div class="order-detail-row"><span>Date</span><span>${o.date}</span></div>
+        <div class="order-detail-row"><span>Status</span><span class="status-badge status-${o.status}">${o.status}</span></div>
+        <hr style="margin:1rem 0;border-color:#F0F0F0;">
+        <h4 style="margin-bottom:0.75rem;font-size:0.95rem;">Items</h4>
+        ${(o.items||[]).map(i => `<div class="order-detail-row"><span>${i.name} x${i.qty}</span><span>LKR ${(i.price*i.qty).toLocaleString()}</span></div>`).join('') || '<p style="color:#999;font-size:0.875rem;">No item details</p>'}
+        <hr style="margin:1rem 0;border-color:#F0F0F0;">
+        <div class="order-detail-row"><span>Total</span><strong style="color:#FF6B35;">LKR ${o.total.toLocaleString()}</strong></div>`;
+    document.getElementById('viewOrderModal').classList.add('active');
+}
+
+// ─── Inventory ────────────────────────────────────────────────
+function renderInventory() {
+    const lowItems = products.filter(p => p.stock < 10);
+    const alert = document.getElementById('lowStockAlert');
+    if (lowItems.length > 0) {
+        alert.classList.add('visible');
+        document.getElementById('lowStockMsg').textContent =
+            `${lowItems.length} product${lowItems.length>1?'s are':' is'} running low on stock (below 10 units): ${lowItems.map(p=>p.name).join(', ')}.`;
+    } else {
+        alert.classList.remove('visible');
+    }
+
+    const tbody = document.getElementById('inventoryTableBody');
+    if (products.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No products to manage. Add products first.</td></tr>';
+        return;
+    }
+    tbody.innerHTML = products.map(p => {
+        const stockStatus = p.stock === 0 ? 'inactive' : p.stock < 10 ? 'low' : 'active';
+        const stockLabel  = p.stock === 0 ? 'Out of Stock' : p.stock < 10 ? 'Low Stock' : 'In Stock';
+        return `
+        <tr>
+            <td>
+                <div class="product-cell">
+                    ${p.image ? `<img src="${p.image}" class="product-thumb" alt="${p.name}">` : `<div class="product-thumb-placeholder">📱</div>`}
+                    <strong>${p.name}</strong>
+                </div>
+            </td>
+            <td><span class="tag">${p.category}</span></td>
+            <td><strong>${p.stock}</strong> units</td>
+            <td>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <input type="number" class="stock-input" id="inv_${p.id}" value="${p.stock}" min="0">
+                    <button class="btn btn-small" onclick="updateSingleStock('${p.id}')">Update</button>
+                </div>
+            </td>
+            <td><span class="status-badge status-${stockStatus}">${stockLabel}</span></td>
+        </tr>`;
+    }).join('');
+}
+
+function updateSingleStock(id) {
+    const input = document.getElementById('inv_' + id);
+    const newStock = parseInt(input.value);
+    if (isNaN(newStock) || newStock < 0) { alert('Please enter a valid stock number.'); return; }
+    const idx = products.findIndex(p => p.id === id);
+    if (idx > -1) {
+        products[idx].stock = newStock;
+        setData('sm_products', products);
+        renderInventory();
+        renderProducts();
+        renderDashboard();
+    }
+}
+
+function saveAllStock() {
+    let changed = 0;
+    products.forEach(p => {
+        const input = document.getElementById('inv_' + p.id);
+        if (!input) return;
+        const newStock = parseInt(input.value);
+        if (!isNaN(newStock) && newStock >= 0 && newStock !== p.stock) {
+            p.stock = newStock;
+            changed++;
+        }
+    });
+    if (changed === 0) { alert('No changes to save.'); return; }
+    setData('sm_products', products);
+    renderInventory();
+    renderProducts();
+    renderDashboard();
+    alert(`${changed} product${changed>1?'s':''} updated!`);
+}
+
+// ─── Settings ────────────────────────────────────────────────
+function saveStoreSettings() {
+    settings.name    = document.getElementById('storeName').value;
+    settings.phone   = document.getElementById('storePhone').value;
+    settings.address = document.getElementById('storeAddress').value;
+    setData('sm_settings', settings);
+    alert('Store settings saved!');
+}
+
+function savePaymentSettings() {
+    alert('Payment settings updated!');
+}
+
+function clearAllData() {
+    if (!confirm('This will delete ALL products and orders. Are you sure?')) return;
+    if (!confirm('This cannot be undone. Confirm again to proceed.')) return;
+    products = []; orders = [];
+    setData('sm_products', products);
+    setData('sm_orders', orders);
+    renderDashboard();
+    renderProducts();
+    renderOrders();
+    renderInventory();
+    alert('All data cleared.');
+}
+
+// ─── Helpers ──────────────────────────────────────────────────
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) window.location.href = 'index.html';
+}
+
+// Close modals on outside click
+['productModal','viewProductModal','viewOrderModal'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('active');
+    });
+});
+
+// ─── Init ─────────────────────────────────────────────────────
+renderDashboard();
+</script>
+</body>
+</html>

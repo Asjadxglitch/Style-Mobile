@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Mobile - Premium Mobile Accessories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Responsive headings - mobile first */
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.25rem; }
+        }
+
+        @media (min-width: 1024px) {
+            h1 { font-size: 3rem; }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .container { padding: 0 1.5rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .container { padding: 0 2rem; }
+        }
+
+        /* ── Header ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-section img {
+            height: 4rem;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        @media (min-width: 768px) {
+            .logo-section img { height: 3.7rem; }
+            .logo-text { font-size: 1.5rem; }
+        }
+
+        /* Desktop nav */
+        nav {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            nav { display: flex; }
+        }
+
+        nav a {
+            color: #1A1A1A;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: #FF6B35; }
+		
+		/* ── Dropdown ── */
+.nav-dropdown { position: relative; }
+
+.nav-dropdown > a {
+    display: flex; align-items: center; gap: 0.3rem; cursor: pointer;
+}
+
+.nav-dropdown > a::after {
+    content: '▾'; font-size: 0.75rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    min-width: 200px;
+    z-index: 200;
+    padding: 0.5rem 0;
+}
+
+.nav-dropdown:hover .dropdown-menu { display: block; }
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.65rem 1.25rem;
+    color: #1A1A1A;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #F5F5F5;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:last-child { border-bottom: none; }
+
+.dropdown-menu a:hover { background-color: #FFF5F1; color: #FF6B35; }
+
+/* Mobile categories */
+.mobile-nav .mobile-category-toggle {
+    display: flex; justify-content: space-between;
+    padding: 0.85rem 1.25rem; border-bottom: 1px solid #F0F0F0;
+    font-weight: 500; cursor: pointer; font-size: 1rem;
+}
+
+.mobile-nav .mobile-category-toggle:hover { background-color: #FFF5F1; color: #FF6B35; }
+
+.mobile-dropdown { display: none; background-color: #FAFAFA; }
+.mobile-dropdown.open { display: block; }
+
+.mobile-dropdown a {
+    padding: 0.7rem 2rem !important;
+    font-size: 0.9rem !important;
+    color: #555 !important;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+        /* Right side of header */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Cart button */
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            border-radius: 0.5rem;
+        }
+
+        .cart-btn:hover { background-color: #F8F9FA; }
+
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #FF6B35;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── Hamburger button (mobile only) ── */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            min-width: 44px;
+            min-height: 44px;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .hamburger:hover { background-color: #F8F9FA; }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #1A1A1A;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animate to X when open */
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Hide hamburger on desktop */
+        @media (min-width: 768px) {
+            .hamburger { display: none; }
+        }
+
+        /* ── Mobile nav drawer ── */
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background-color: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 1rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .mobile-nav.open { display: flex; }
+
+        .mobile-nav a {
+            color: #1A1A1A;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #F0F0F0;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .mobile-nav a:last-child { border-bottom: none; }
+
+        .mobile-nav a:hover {
+            background-color: #FFF5F1;
+            color: #FF6B35;
+        }
+
+        /* Hide mobile nav on desktop */
+        @media (min-width: 768px) {
+            .mobile-nav { display: none !important; }
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            padding: 0.65rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 0.95rem;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: #FF6B35;
+            color: white;
+        }
+
+        .btn-primary:hover { background-color: #E55A2B; }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FF6B35;
+            border: 2px solid #FF6B35;
+        }
+
+        .btn-outline:hover { background-color: rgba(255,107,53,0.05); }
+
+        /* ── Hero Section ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 3.5rem 0;
+        }
+
+        @media (min-width: 768px) { .hero { padding: 6rem 0; } }
+        @media (min-width: 1024px) { .hero { padding: 8rem 0; } }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663654236826/QHtkuGUr5Zxwhh3KWgbf6y/hero-mobile-accessories-aNHMMUDri6GLYSDn8ccp3P.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 40rem;
+        }
+
+        .accent-bar {
+            height: 0.25rem;
+            width: 3rem;
+            background-color: #FF6B35;
+            border-radius: 0.125rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .accent-bar { width: 4rem; margin-bottom: 1.5rem; }
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) { .hero h1 { font-size: 3rem; } }
+        @media (min-width: 1024px) { .hero h1 { font-size: 3.5rem; } }
+
+        .hero p {
+            font-size: 1rem;
+            color: #666666;
+            margin-bottom: 1.5rem;
+            max-width: 28rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero p { font-size: 1.125rem; margin-bottom: 2rem; }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* ── Features Section ── */
+        .features {
+            background-color: #F8F9FA;
+            padding: 3rem 0;
+        }
+
+        @media (min-width: 768px) { .features { padding: 4rem 0; } }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .feature-card { text-align: center; }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,107,53,0.1);
+            border-radius: 0.5rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card p { color: #666666; font-size: 0.9rem; }
+
+        /* ── Products Section ── */
+        .products { padding: 3rem 0; }
+
+        @media (min-width: 768px) { .products { padding: 5rem 0; } }
+
+        .section-header { margin-bottom: 2rem; }
+
+        @media (min-width: 768px) { .section-header { margin-bottom: 3rem; } }
+
+        .section-header p { color: #666666; font-size: 0.95rem; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .product-card {
+            background-color: #F8F9FA;
+            border-radius: 0.5rem;
+            border: 1px solid #E0E0E0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-0.25rem);
+        }
+
+        .product-image {
+            height: 10rem;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(0,153,255,0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .product-image { height: 16rem; font-size: 3rem; }
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #FF6B35;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-info { padding: 1rem; }
+
+        @media (min-width: 768px) { .product-info { padding: 1.5rem; } }
+
+        .product-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        @media (min-width: 768px) { .product-name { font-size: 1.125rem; } }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        .stars { color: #FFD700; }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FF6B35;
+        }
+
+        @media (min-width: 768px) { .product-price { font-size: 1.5rem; } }
+
+        .btn-small {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8rem;
+            min-height: 36px;
+        }
+
+        @media (min-width: 768px) {
+            .btn-small { padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+        }
+
+        .view-all-btn {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* ── Payment Methods Section ── */
+        .payment-methods {
+            background-color: #F8F9FA;
+            padding: 3rem 0;
+        }
+
+        @media (min-width: 768px) { .payment-methods { padding: 5rem 0; } }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .payment-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .payment-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            border: 1px solid #E0E0E0;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        @media (min-width: 768px) { .payment-card { padding: 2rem; } }
+
+        .payment-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .payment-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+        .payment-card p { color: #666666; font-size: 0.875rem; }
+
+        /* ── Contact Section ── */
+        .contact { padding: 3rem 0; }
+
+        @media (min-width: 768px) { .contact { padding: 5rem 0; } }
+
+        .contact-content {
+            max-width: 48rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content > p {
+            font-size: 1rem;
+            color: #666666;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-content > p { font-size: 1.125rem; margin-bottom: 2rem; }
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .contact-card {
+            background-color: #F8F9FA;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border: 1px solid #E0E0E0;
+            text-align: left;
+        }
+
+        .contact-card p { color: #666666; font-size: 0.875rem; }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            min-height: 44px;
+            transition: opacity 0.3s;
+        }
+
+        .social-btn:hover { opacity: 0.9; }
+
+        .whatsapp  { background-color: #25D366; }
+        .facebook  { background-color: #1877F2; }
+        .tiktok    { background-color: #000000; }
+
+        /* ── Footer ── */
+        footer {
+            background-color: #1A1A1A;
+            color: white;
+            padding: 2.5rem 0;
+        }
+
+        @media (min-width: 768px) { footer { padding: 3rem 0; } }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        }
+
+        .footer-section h4 { font-weight: 600; margin-bottom: 0.75rem; font-size: 0.95rem; }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover { color: white; }
+
+        .footer-section ul { list-style: none; }
+
+        .footer-section ul li { margin-bottom: 0.4rem; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+        }
+
+        /* ── Utility Classes ── */
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mb-2  { margin-bottom: 0.5rem; }
+        .mb-4  { margin-bottom: 1rem; }
+        .mb-8  { margin-bottom: 2rem; }
+        .mt-4  { margin-top: 1rem; }
+        .mt-8  { margin-top: 2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+               <div class="logo-section" onclick="window.location.href='index.html'" style="cursor:pointer;">
+    <img src="style-mobile-logo.png" alt="Style Mobile">
+    <span class="logo-text">Style Mobile</span>
+</div>
+
+                <!-- Desktop nav -->
+                <nav>
+    <a href="#home">Home</a>
+    <div class="nav-dropdown">
+        <a>Categories</a>
+        <div class="dropdown-menu">
+            <a href="shop.html?cat=cases">Phone Cases</a>
+            <a href="shop.html?cat=screen-protectors">Screen Protectors</a>
+            <a href="shop.html?cat=chargers">Chargers</a>
+            <a href="shop.html?cat=cables">Cables</a>
+            <a href="shop.html?cat=earphones">Earphones</a>
+            <a href="shop.html?cat=power-banks">Power Banks</a>
+            <a href="shop.html?cat=accessories">Accessories</a>
+        </div>
+    </div>
+    <a href="#contact">Contact Us</a>
+</nav>
+
+                <div class="header-actions">
+                    <button class="cart-btn" onclick="window.location.href='cart.html'">
+                        🛒
+                        <span class="cart-badge" id="cartCount" style="display: none;">0</span>
+                    </button>
+                    <!-- Hamburger (mobile only) -->
+                    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile nav drawer -->
+        <div class="mobile-nav" id="mobileNav">
+    <a href="#home" onclick="closeMobileNav()">Home</a>
+    <div class="mobile-category-toggle" onclick="toggleMobileCategories()">
+        Categories <span id="catArrow">▾</span>
+    </div>
+    <div class="mobile-dropdown" id="mobileCategoryDropdown">
+        <a href="shop.html?cat=cases"              onclick="closeMobileNav()">Phone Cases</a>
+        <a href="shop.html?cat=screen-protectors"  onclick="closeMobileNav()">Screen Protectors</a>
+        <a href="shop.html?cat=chargers"           onclick="closeMobileNav()">Chargers</a>
+        <a href="shop.html?cat=cables"             onclick="closeMobileNav()">Cables</a>
+        <a href="shop.html?cat=earphones"          onclick="closeMobileNav()">Earphones</a>
+        <a href="shop.html?cat=power-banks"        onclick="closeMobileNav()">Power Banks</a>
+        <a href="shop.html?cat=accessories"        onclick="closeMobileNav()">Accessories</a>
+    </div>
+    <a href="#contact" onclick="closeMobileNav()">Contact Us</a>
+</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="accent-bar"></div>
+                <h1>Premium Mobile Accessories</h1>
+                <p>Discover our curated collection of high-quality phone cases, screen protectors, chargers, and more. Protect your device in style.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="window.location.href='shop.html'">Shop Now</button>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Get your order delivered within 24-48 hours across Colombo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Payment</h3>
+                    <p>Multiple payment options including Koko, bank transfer, and card</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>24/7 Support</h3>
+                    <p>Contact us via WhatsApp, Facebook, or call for instant assistance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <div class="accent-bar"></div>
+                <h2>Featured Products</h2>
+                <p>Handpicked selection of our best-selling mobile accessories</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        📱
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Phone Case</h3>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.8 (124)</span>
+                        </div>
+                       <button class="btn btn-primary btn-small" onclick="addToCart('Premium Phone Case', 1299, '📱')">Add</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        🔒
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Tempered Glass Screen Protector</h3>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.9 (89)</span>
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="addToCart('Tempered Glass Screen Protector', 599, '🔒')">Add</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        🔌
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wireless Charging Pad</h3>
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.7 (156)</span>
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="addToCart('Wireless Charging Pad', 2499, '🔌')">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-all-btn">
+                <button class="btn btn-primary" onclick="window.location.href='shop.html'">View All Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods Section -->
+    <section class="payment-methods">
+        <div class="container">
+            <div class="section-header text-center mx-auto" style="max-width: 48rem;">
+                <div class="accent-bar mx-auto"></div>
+                <h2>Payment Methods</h2>
+                <p>We accept multiple payment options for your convenience</p>
+            </div>
+
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="payment-icon">💳</div>
+                    <h3>Card Payment</h3>
+                    <p>Visa, Mastercard, and other major credit/debit cards accepted</p>
+                </div>
+                <div class="payment-card">
+                    <div class="payment-icon">🏦</div>
+                    <h3>Bank Transfer</h3>
+                    <p>Direct bank transfer with competitive rates and instant confirmation</p>
+                </div>
+                <div class="payment-card">
+                    <div class="payment-icon">📱</div>
+                    <h3>Koko Payment</h3>
+                    <p>Fast and secure payment through Koko mobile payment gateway</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="accent-bar mx-auto"></div>
+                <h2>Get In Touch</h2>
+                <p>Have questions? We're here to help! Contact us through any of these channels.</p>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>📍 Address</h3>
+                        <p>8 Piliyandala - Maharagama Rd, Maharagama 10280, Sri Lanka</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>📞 Phone</h3>
+                        <p>077 550 6050</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://wa.me/94775506050" target="_blank" class="social-btn whatsapp">💬 WhatsApp</a>
+                    <a href="https://web.facebook.com/stylemobilelk" target="_blank" class="social-btn facebook">f Facebook</a>
+                    <a href="https://www.tiktok.com/@stylemobilelk" target="_blank" class="social-btn tiktok">🎵 TikTok</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About Style Mobile</h4>
+                    <p>Your trusted source for premium mobile accessories in Maharagama</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="shop.html">Shop</a></li>
+                        
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Payment Methods</h4>
+                    <ul>
+                        <li><a href="#">Card Payment</a></li>
+                        <li><a href="#">Bank Transfer</a></li>
+                        <li><a href="#">Koko Payment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="https://web.facebook.com/stylemobilelk" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.tiktok.com/@stylemobilelk" target="_blank">TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Style Mobile. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Hamburger menu toggle ──
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileNav    = document.getElementById('mobileNav');
+
+        hamburgerBtn.addEventListener('click', function () {
+            const isOpen = mobileNav.classList.toggle('open');
+            hamburgerBtn.classList.toggle('open', isOpen);
+            hamburgerBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+
+        function closeMobileNav() {
+            mobileNav.classList.remove('open');
+            hamburgerBtn.classList.remove('open');
+            hamburgerBtn.setAttribute('aria-label', 'Open menu');
+        }
+		function toggleMobileCategories() {
+    const dropdown = document.getElementById('mobileCategoryDropdown');
+    const arrow = document.getElementById('catArrow');
+    dropdown.classList.toggle('open');
+    arrow.textContent = dropdown.classList.contains('open') ? '▴' : '▾';
+}
+
+        // Close mobile nav on outside click
+        document.addEventListener('click', function (e) {
+            if (!hamburgerBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+                closeMobileNav();
+            }
+        });
+
+        // ── Cart functionality ──
+        let cartCount = 0;
+
+       function addToCart(name, price, icon) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existing = cart.findIndex(item => item.name === name);
+    if (existing >= 0) {
+        cart[existing].quantity += 1;
+    } else {
+        cart.push({ name, price, icon, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    localStorage.setItem('cartCount', cartCount);
+    updateCartBadge();
+    alert(name + ' added to cart!');
+}
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartCount');
+            if (cartCount > 0) {
+                badge.textContent = cartCount;
+                badge.style.display = 'flex';
+            }
+        }
+
+        window.addEventListener('load', function () {
+            const savedCart = localStorage.getItem('cartCount');
+            if (savedCart) {
+                cartCount = parseInt(savedCart);
+                updateCartBadge();
+            }
+        });
+
+        window.addEventListener('beforeunload', function () {
+            localStorage.setItem('cartCount', cartCount);
+        });
+    </script>
+</body>
+</html>
